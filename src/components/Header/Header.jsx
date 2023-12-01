@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition, Dialog } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import logoSansTexte from "../../assets/images/logo/logo-sans-texte.png";
 import { toggleValue } from "../../app/features/openLogin";
+import LogIn from "../Registration/LogIn";
+import SignIn from "../Registration/SignIn";
 
 const navigation = [
   { name: "Les location", link: "/" },
@@ -22,6 +23,8 @@ function classNames(...classes) {
 export default function Header({ logo }) {
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.openLogin.value);
+
+  const [switchRegistration, setSwitchRegistration] = useState(true);
   const [currentLink, setCurrentLink] = useState("/"); // État pour suivre le lien actuel
 
   const handleClick = (link) => {
@@ -237,12 +240,22 @@ export default function Header({ logo }) {
                     </Transition.Child>
                     <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                       <div className="px-4 sm:px-6">
-                        <Dialog.Title className="text-base font-semibold leading-6 text-gray-900">
-                          Panel title
+                        <Dialog.Title
+                          onClick={() =>
+                            setSwitchRegistration(!switchRegistration)
+                          }
+                          className="text-base font-semibold leading-6 text-gray-900"
+                        >
+                          Connexion
                         </Dialog.Title>
                       </div>
-                      <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                        {/* Your content */}
+                      <div
+                        className={`relative transition-all ease-in-out align-center gap-5 flex mt-6 flex-1 px-4 sm:px-6 ${
+                          switchRegistration ? "-translate-x-[89%]" : ""
+                        }`}
+                      >
+                        <LogIn switchRegistration={switchRegistration} />
+                        <SignIn switchRegistration={switchRegistration} />
                       </div>
                     </div>
                   </Dialog.Panel>

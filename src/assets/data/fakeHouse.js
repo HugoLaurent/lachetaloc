@@ -18,7 +18,6 @@ const locations = [
     localisation: "Montréal, Canada",
     finBail: "15/12/2023",
     loyerMensuel: "$900",
-
     imageSrc:
       "https://st.hzcdn.com/simgs/pictures/facades-de-maisons/maison-en-tension-t-arnaud-bertrande-i-photographe-en-architecture-img~0da186eb0b33c21d_4-6380-1-b50d503.jpg",
     description:

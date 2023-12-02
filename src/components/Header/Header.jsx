@@ -12,7 +12,6 @@ import SignIn from "../Registration/SignIn";
 const navigation = [
   { name: "Les location", link: "/" },
   { name: "Mon suivi", link: "/mon-suivi" },
-  { name: "Ma location", link: "/ma-location" },
   { name: "Recherche", link: "/recherche" },
 ];
 
@@ -132,19 +131,7 @@ export default function Header({ logo }) {
                             </Link>
                           )}
                         </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
-                            >
-                              Settings
-                            </a>
-                          )}
-                        </Menu.Item>
+
                         <Menu.Item>
                           {({ active }) => (
                             <a

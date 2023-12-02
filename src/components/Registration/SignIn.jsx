@@ -1,4 +1,4 @@
-export default function SignIn() {
+export default function SignIn({ switchRegistration, setSwitchRegistration }) {
   return (
     <>
       <div className="flex min-h-full min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -61,12 +61,13 @@ export default function SignIn() {
         </div>
         <div className="flex justify-between">
           <p>Déjà un compte ?</p>
-          <a
+          <button
+            onClick={() => setSwitchRegistration(!switchRegistration)}
             href="#"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
-            Connectez vous !
-          </a>
+            Connectez-vous !
+          </button>
         </div>
       </div>
     </>

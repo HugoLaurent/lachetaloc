@@ -9,6 +9,7 @@ import MyFollow from "./Pages/MyFollow";
 import logo from "./assets/images/logo/logo.png";
 import MaLocation from "./Pages/MaLocation";
 import Recherche from "./Pages/Recherche";
+import Profile from "./Pages/Profile";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="mon-suivi" element={<MyFollow />} />
         <Route path="ma-location" element={<MaLocation />} />
         <Route path="recherche" element={<Recherche />} />
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

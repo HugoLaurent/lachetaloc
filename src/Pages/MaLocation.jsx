@@ -3,7 +3,7 @@ import locations from "../assets/data/fakeHouse";
 export default function MaLocation() {
   return (
     <div className="mt-8 mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-      <h2 className="text-2xl mb-2 font-bold tracking-tight text-gray-900">
+      <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
         Votre location
       </h2>
       <div

@@ -5,7 +5,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom";
 
 import logoSansTexte from "../../assets/images/logo/logo-sans-texte.png";
-import { toggleValue } from "../../app/features/openLogin";
+import { toggleValue } from "../../app/reducer/openLogin";
 import LogIn from "../Registration/LogIn";
 import SignIn from "../Registration/SignIn";
 

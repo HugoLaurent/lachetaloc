@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import openLogin from "./features/openLogin";
+import openLogin from "./reducer/openLogin";
 
 export default configureStore({
   reducer: {

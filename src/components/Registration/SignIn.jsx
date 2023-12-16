@@ -1,4 +1,36 @@
+import { useState } from "react";
+
 export default function SignIn({ switchRegistration, setSwitchRegistration }) {
+  const [pseudo, setPseudo] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(pseudo, email, password);
+    try {
+      const data = await fetch("http://localhost:3000/users/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pseudo, email, password }),
+      });
+
+      if (!data.ok) {
+        // Si la réponse n'est pas OK (dans la plage 200-299), considérez cela comme une erreur
+        const errorResponse = await data.json();
+        throw new Error(errorResponse.message);
+      }
+
+      const result = await data.json();
+      console.log(result);
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
   return (
     <>
       <div className="flex min-h-full min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -8,7 +40,7 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label
                 htmlFor="pseudo"
@@ -18,6 +50,7 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
               </label>
               <div className="mt-2">
                 <input
+                  onChange={(e) => setPseudo(e.target.value)}
                   id="pseudo"
                   name="pseudo"
                   type="pseudo"
@@ -37,6 +70,7 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
               </label>
               <div className="mt-2">
                 <input
+                  onChange={(e) => setEmail(e.target.value)}
                   id="email"
                   name="email"
                   type="email"
@@ -58,8 +92,9 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
               </div>
               <div className="mt-2">
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="12 caractères minimum"
-                  id="password"
+                  id="passwordLogin"
                   name="password"
                   type="password"
                   autoComplete="current-password"

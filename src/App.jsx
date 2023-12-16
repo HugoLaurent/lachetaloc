@@ -2,7 +2,7 @@ import "./App.css";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import { fetchAccomodation } from "../src/app/reducer/accomodationsReducer";
@@ -17,6 +17,8 @@ import Profile from "./Pages/Profile";
 
 function App() {
   const dispatch = useDispatch();
+  const isLogged = useSelector((state) => state.isLogged.isLog);
+  console.log(isLogged);
 
   useEffect(() => {
     dispatch(fetchAccomodation());

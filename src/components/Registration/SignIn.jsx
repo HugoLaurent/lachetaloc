@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Alert from "../Alert/Alert";
 
 export default function SignIn({ switchRegistration, setSwitchRegistration }) {
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorCode, setErrorCode] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     console.log(pseudo, email, password);
     try {
-      const data = await fetch("http://localhost:3000/users/create", {
+      const response = await fetch("http://localhost:3000/users/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -18,23 +21,42 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
         body: JSON.stringify({ pseudo, email, password }),
       });
 
-      if (!data.ok) {
-        // Si la réponse n'est pas OK (dans la plage 200-299), considérez cela comme une erreur
-        const errorResponse = await data.json();
-        throw new Error(errorResponse.message);
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        setErrorCode(errorResponse.code);
+        setErrorMessage(errorResponse.message);
+        throw new Error(errorResponse.message || "Failed to create user");
       }
-
-      const result = await data.json();
-      console.log(result);
+      setEmail("");
+      setPassword("");
+      setPseudo("");
+      setSwitchRegistration(!switchRegistration);
+      const result = await response.json();
+      console.log(result, "result");
     } catch (error) {
-      console.log(error, "error");
+      return error;
     }
   };
 
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setErrorMessage("");
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeoutId); // Nettoyage du timeout si le composant est démonté ou si la dépendance change
+    };
+  }, [errorMessage]);
+
   return (
     <>
-      <div className="flex min-h-full min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="flex min-h-full min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm relative">
+          {errorMessage && (
+            <div className="absolute -top-4 w-full">
+              <Alert message={errorMessage} />
+            </div>
+          )}
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Inscrivez vous à lache ta loc !
           </h2>

@@ -1,4 +1,34 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeStatus } from "../../app/reducer/loginStatusReducer";
+import { toggleValue } from "../../app/reducer/openLogin";
+
 export default function LogIn({ switchRegistration, setSwitchRegistration }) {
+  const [pseudo, setPseudo] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pseudo, password }),
+      });
+      dispatch(changeStatus());
+      dispatch(toggleValue());
+
+      const token = await response.json();
+      localStorage.setItem("token", token.token);
+      localStorage.setItem("refreshToken", token.refreshToken);
+    } catch (error) {
+      return error;
+    }
+  };
+
   return (
     <>
       <div
@@ -12,20 +42,21 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmit} method="POST">
             <div>
               <label
-                htmlFor="email"
+                htmlFor="pseudo"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Adresse email
+                Pseudo
               </label>
               <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  onChange={(e) => setPseudo(e.target.value)}
+                  id="pseudo"
+                  name="pseudo"
+                  type="pseudo"
+                  autoComplete="pseudo"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -43,6 +74,7 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
               </div>
               <div className="mt-2">
                 <input
+                  onChange={(e) => setPassword(e.target.value)}
                   id="password"
                   name="password"
                   type="password"

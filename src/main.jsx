@@ -12,16 +12,20 @@ import Profile from "./Pages/Profile.jsx";
 import Home from "./Pages/Home.jsx";
 
 import logo from "./assets/images/logo/logo.png";
-import isAuth, { canActivate } from "./hooks/isAuth.js";
+import canActivate from "./hooks/canActivate.js";
+import checkUserAuthentication from "./hooks/checkUserAuthentication.js";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    id: "root",
-    loader: isAuth,
+    loader: checkUserAuthentication,
+
     children: [
-      { path: "/", element: <Home logo={logo} /> },
+      {
+        path: "/",
+        element: <Home logo={logo} />,
+      },
       { path: "mon-suivi", element: <MyFollow /> },
       { path: "recherche", element: <Recherche /> },
       { path: "profile", element: <Profile />, loader: canActivate },

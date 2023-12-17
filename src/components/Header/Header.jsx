@@ -25,7 +25,7 @@ export default function Header({ logo }) {
   const openLogin = useSelector((state) => state.openLogin.value);
   const isLogged = useSelector((state) => state.isLogged.isLog);
 
-  const [switchRegistration, setSwitchRegistration] = useState(true);
+  const [switchRegistration, setSwitchRegistration] = useState(false);
   const [currentLink, setCurrentLink] = useState("/"); // État pour suivre le lien actuel
 
   const handleClick = (link) => {

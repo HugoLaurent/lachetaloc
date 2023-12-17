@@ -1,7 +1,7 @@
 export default function Hero({ logo }) {
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl py-16 sm:py-32 lg:py-40">
+      <div className="mx-auto max-w-2xl py-16 sm:py-12 lg:py-20">
         <div className="text-center">
           <h1 className="text-3xl items-center flex flex-col font-bold tracking-tight text-gray-900 sm:text-5xl">
             Trouvez votre prochain chez-vous en toute simplicité avec{" "}

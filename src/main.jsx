@@ -12,6 +12,7 @@ import Profile from "./Pages/Profile.jsx";
 import Home from "./Pages/Home.jsx";
 
 import logo from "./assets/images/logo/logo.png";
+
 import canActivate from "./hooks/canActivate.js";
 import checkUserAuthentication from "./hooks/checkUserAuthentication.js";
 
@@ -19,7 +20,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    loader: checkUserAuthentication,
 
     children: [
       {

@@ -4,12 +4,12 @@ import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import Header from "./components/Header/Header";
-
 import logo from "./assets/images/logo/logo.png";
 
+import Header from "./components/Header/Header.jsx";
+import Footer from "./components/Footer/Footer.jsx";
+
 import { fetchAccomodation } from "../src/app/reducer/accomodationsReducer";
-import { Footer } from "./components/Footer/Footer";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,12 +18,23 @@ function App() {
     dispatch(fetchAccomodation());
   }, [dispatch]);
 
+  function Layout({ children }) {
+    return (
+      <div className="flex flex-col justify-between h-screen">
+        <Header logo={logo} />
+        {children}
+        <Footer logo={logo} />
+      </div>
+    );
+  }
+
   return (
-    <>
-      <Header logo={logo} />
-      <Outlet />;
-      <Footer logo={logo} />
-    </>
+    <div className="flex flex-col justify-between h-screen">
+      <Layout>
+        <Outlet logo={logo} />
+      </Layout>
+      ;
+    </div>
   );
 }
 

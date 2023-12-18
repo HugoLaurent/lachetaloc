@@ -1,4 +1,4 @@
-export const Footer = ({ logo }) => {
+function Footer({ logo }) {
   return (
     <div className="relative mt-16 bg-[#374151] texte-white">
       <svg
@@ -83,4 +83,6 @@ export const Footer = ({ logo }) => {
       </div>
     </div>
   );
-};
+}
+
+export default Footer;

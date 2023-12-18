@@ -24,6 +24,7 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
       const token = await response.json();
       localStorage.setItem("token", token.token);
       localStorage.setItem("refreshToken", token.refreshToken);
+      window.location.reload();
     } catch (error) {
       return error;
     }

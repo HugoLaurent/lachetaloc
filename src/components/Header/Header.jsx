@@ -29,46 +29,63 @@ export default function Header({ logo }) {
 
   return (
     <>
-      <div className="bg-[#374151] py-5 flex justify-around items-center">
-        <nav className="flex items-center gap-2">
-          <img className="w-[200px]" src={logo} alt="" />
-
-          <ul className="flex gap-2">
-            {navigation.map((item) => (
-              <li key={item.link} className="w-[150px]">
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "rounded-md  px-3 box-content py-2 text-lg font-medium bg-gray-900 text-white"
-                      : "rounded-md  px-3 box-content py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  }
-                  to={item.link}
-                >
-                  {item.name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <nav className="flex w-fit gap-4">
-          {!isLogged ? (
-            <button
-              onClick={handleLoginClick}
-              className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-            >
-              Se connecter
-            </button>
-          ) : (
-            <button
-              onClick={() => dispatch(changeStatus())}
-              className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-            >
-              Se déconnecter
-            </button>
-          )}
-          <img className="w-8" src={logoNoText} alt="" />
-          <img className="w-8" src={notification} alt="" />
-        </nav>
+      <div className="bg-[#374151] py-5 ">
+        <section className="flex justify-around items-center">
+          <nav className="flex items-center gap-2">
+            <img className="w-[200px]" src={logo} alt="" />
+            <ul className="gap-2 hidden lg:flex">
+              {navigation.map((item) => (
+                <li key={item.link} className="w-[150px]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "rounded-md  px-3 box-content py-2 text-lg font-medium bg-gray-900 text-white"
+                        : "rounded-md  px-3 box-content py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    }
+                    to={item.link}
+                  >
+                    {item.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav className="flex w-fit gap-4">
+            {!isLogged ? (
+              <button
+                onClick={handleLoginClick}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+              >
+                Se connecter
+              </button>
+            ) : (
+              <button
+                onClick={() => dispatch(changeStatus())}
+                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+              >
+                Se déconnecter
+              </button>
+            )}
+            <img className="w-8" src={logoNoText} alt="" />
+            <img className="w-8" src={notification} alt="" />
+          </nav>
+        </section>
+        <ul className="gap-2 flex lg:hidden justify-center pt-4">
+          {navigation.map((item) => (
+            <li key={item.link} className="w-[150px]">
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "rounded-md  px-3 box-content py-2 text-lg font-medium bg-gray-900 text-white"
+                    : "rounded-md  px-3 box-content py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                }
+                to={item.link}
+              >
+                {item.name}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
       </div>
       <Transition.Root show={openLogin} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={toggleValue}>

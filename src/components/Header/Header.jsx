@@ -22,6 +22,7 @@ export default function Header({ logo }) {
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.openLogin.value);
   const isLogged = useSelector((state) => state.isLogged.isLog);
+  console.log(isLogged);
 
   const handleLoginClick = () => {
     dispatch(toggleValue());

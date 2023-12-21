@@ -19,12 +19,12 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
         body: JSON.stringify({ pseudo, password }),
       });
       dispatch(changeStatus());
+      console.log("The user is logged in");
       dispatch(toggleValue());
 
       const token = await response.json();
       localStorage.setItem("token", token.token);
       localStorage.setItem("refreshToken", token.refreshToken);
-      window.location.reload();
     } catch (error) {
       return error;
     }

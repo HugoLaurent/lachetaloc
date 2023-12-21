@@ -2,6 +2,7 @@ import "./LatestLoc.css";
 
 import { useSelector } from "react-redux";
 import AccomodationCard from "../AccomodationCard/AccomodationCard";
+import CardModal from "../CardModal/CardModal";
 
 export default function LatestLoc() {
   const accomodations = useSelector(
@@ -31,6 +32,7 @@ export default function LatestLoc() {
             ))}
         </div>
       </div>
+      <CardModal />
     </div>
   );
 }

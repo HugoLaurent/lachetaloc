@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate, redirect } from "react-router-dom";
 import { toggleValue } from "../../app/reducer/openLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useState } from "react";
@@ -22,17 +22,16 @@ export default function Header({ logo }) {
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.openLogin.value);
   const isLogged = useSelector((state) => state.isLogged.isLog);
-  console.log(isLogged);
 
   const handleLoginClick = () => {
     dispatch(toggleValue());
   };
 
-  const handleDisconnect = () => {
+  function handleDisconnect() {
     dispatch(changeStatus());
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
-  };
+  }
 
   return (
     <>

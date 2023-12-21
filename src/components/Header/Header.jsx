@@ -28,6 +28,12 @@ export default function Header({ logo }) {
     dispatch(toggleValue());
   };
 
+  const handleDisconnect = () => {
+    dispatch(changeStatus());
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+  };
+
   return (
     <>
       <div className="bg-[#374151] py-5 ">
@@ -61,7 +67,7 @@ export default function Header({ logo }) {
               </button>
             ) : (
               <button
-                onClick={() => dispatch(changeStatus())}
+                onClick={handleDisconnect}
                 className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
               >
                 Se déconnecter

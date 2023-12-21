@@ -10,7 +10,6 @@ export const fetchFollowed = createAsyncThunk(
   "followed/fetchFollowed",
 
   async () => {
-    console.log();
     const response = await fetch("http://localhost:3000/follows", {
       headers: {
         Authorization: `Bearer ${token}`,

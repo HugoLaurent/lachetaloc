@@ -19,11 +19,9 @@ export default function LatestLoc() {
   const accomodations = useSelector(
     (state) => state.accomodation.accomodations
   );
-  console.log(accomodations);
   const latestAccomodation = accomodations.slice(-8);
 
   function handleModal(id, title, description, price, departement, image, end) {
-    console.log(departement);
     dispatch(toggleValueModal());
     setIdCard(id);
     setTitleCard(title);

@@ -13,7 +13,6 @@ export default function MyFollow() {
   const followedLocations = useSelector((state) => state.follows.followed);
 
   const isLogged = useSelector((state) => state.isLogged.isLog);
-  console.log(isLogged);
 
   if (!isLogged) {
     dispatch(toggleValue());

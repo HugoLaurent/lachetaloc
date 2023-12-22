@@ -1,4 +1,4 @@
-import { NavLink, Navigate, redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { toggleValue } from "../../app/reducer/openLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useState } from "react";
@@ -38,7 +38,7 @@ export default function Header({ logo }) {
       <div className="bg-[#374151] py-5 ">
         <section className="flex justify-around items-center">
           <nav className="flex items-center gap-2">
-            <img className="w-[200px]" src={logo} alt="" />
+            <img className="w-[250px]" src={logo} alt="" />
             <ul className="gap-2 hidden lg:flex">
               {navigation.map((item) => (
                 <li key={item.link} className="w-[150px]">
@@ -72,8 +72,8 @@ export default function Header({ logo }) {
                 Se déconnecter
               </button>
             )}
-            <img className="w-8" src={logoNoText} alt="" />
-            <img className="w-8" src={notification} alt="" />
+            <img className="w-12" src={logoNoText} alt="" />
+            <img className="w-8 h-8" src={notification} alt="" />
           </nav>
         </section>
         <ul className="gap-2 flex lg:hidden justify-center pt-4">

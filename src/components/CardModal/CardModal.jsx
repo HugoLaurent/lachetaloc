@@ -20,15 +20,17 @@ export default function CardModal({
   const [error, setError] = useState("");
 
   async function handleFollow() {
-    const response = await fetch(`http://localhost:3000/follows/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-        Origin: "http://localhost:5173",
-      },
-      body: JSON.stringify({ user_id: id }),
-    });
+    const response = await fetch(
+      `https://lachetaloc.onrender.com/follows/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ user_id: id }),
+      }
+    );
     const data = await response.json();
     if (response.status === 409) {
       setError(data.error);

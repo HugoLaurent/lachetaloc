@@ -10,10 +10,9 @@ export const fetchFollowed = createAsyncThunk(
   "followed/fetchFollowed",
 
   async () => {
-    const response = await fetch("http://localhost:3000/follows", {
+    const response = await fetch("https://lachetaloc.onrender.com/follows", {
       headers: {
         Authorization: `Bearer ${token}`,
-        Origin: "http://localhost:5173",
       },
     });
     const data = await response.json();

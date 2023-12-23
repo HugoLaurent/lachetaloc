@@ -23,13 +23,16 @@ async function checkUserAuthentication() {
         console.log("refresh token not present");
         return redirect("/");
       }
-      const response = await fetch("http://localhost:3000/auth/refresh", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ refreshToken }),
-      });
+      const response = await fetch(
+        "https://lachetaloc.onrender.com/auth/refresh",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ refreshToken }),
+        }
+      );
       const data = await response.json();
       if (data.token) {
         store.dispatch(changeStatus(true));

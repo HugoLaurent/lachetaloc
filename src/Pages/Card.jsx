@@ -11,7 +11,9 @@ function Card() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/public/card/${id}`);
+      const response = await fetch(
+        `https://lachetaloc.onrender.com/public/card/${id}`
+      );
     } catch (error) {
       console.log(error);
     }

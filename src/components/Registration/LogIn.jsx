@@ -11,13 +11,16 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ pseudo, password }),
-      });
+      const response = await fetch(
+        "https://lachetaloc.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pseudo, password }),
+        }
+      );
       dispatch(changeStatus());
       dispatch(toggleValue());
 

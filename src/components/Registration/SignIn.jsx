@@ -12,13 +12,16 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/users/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ pseudo, email, password }),
-      });
+      const response = await fetch(
+        "https://lachetaloc.onrender.com/users/create",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pseudo, email, password }),
+        }
+      );
 
       if (!response.ok) {
         const errorResponse = await response.json();

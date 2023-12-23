@@ -9,7 +9,7 @@ export const fetchAccomodation = createAsyncThunk(
 
   async () => {
     const response = await fetch(
-      "http://localhost:3000/public/allAccomodation"
+      "https://lachetaloc.onrender.com/public/allAccomodation"
     );
     const data = await response.json();
     return data;

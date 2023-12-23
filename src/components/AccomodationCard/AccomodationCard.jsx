@@ -5,7 +5,7 @@ function AccomodationCard(props) {
     <div key={id} className="relative">
       <div className="container aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
         <img
-          src={`http://localhost:3000/public/getImage/${id}`}
+          src={`https://lachetaloc.onrender.com/public/getImage/${id}`}
           alt={title}
           className="relative h-full w-full object-cover object-center lg:h-full lg:w-full "
         />

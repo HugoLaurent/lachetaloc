@@ -1,8 +1,17 @@
 import { useDispatch } from "react-redux";
 import { toggleValue } from "../../app/reducer/openLogin";
+import { redirect } from "react-router-dom";
 
 export default function Hero({ logo }) {
   const dispatch = useDispatch();
+
+  function handleJeChercheButton() {
+    dispatch(toggleValue());
+  }
+
+  function handleJeLacheButton() {
+    dispatch(toggleValue());
+  }
 
   return (
     <div className="bg-white">
@@ -20,13 +29,13 @@ export default function Hero({ logo }) {
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <button
-              onClick={() => dispatch(toggleValue())}
+              onClick={handleJeChercheButton}
               className="rounded-md bg-[#374151] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 transition-all ease-in-out duration-1000"
             >
               Je cherche !
             </button>
             <button
-              onClick={() => dispatch(toggleValue())}
+              onClick={handleJeLacheButton}
               className="text-sm rounded-md font-semibold leading-6 px-3.5 py-2.5 text-gray-900 hover:bg-gray-300 transition-all ease-in-out duration-1000"
             >
               Je lache ! <span aria-hidden="true">→</span>

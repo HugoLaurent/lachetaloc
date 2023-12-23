@@ -89,7 +89,7 @@ export default function CardModal({
                       </Dialog.Title>
                       <div className="mt-2">
                         <img
-                          src={`http://localhost:3000/public/getImage/${id}`}
+                          src={`https://lachetaloc.onrender.com/public/getImage/${id}`}
                           alt=""
                         />
                         <p className="text-sm text-gray-500 pt-5">

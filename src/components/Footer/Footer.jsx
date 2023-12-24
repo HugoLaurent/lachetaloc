@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function Footer({ logo }) {
   return (
     <div className="relative mt-16 bg-[#374151] texte-white">
@@ -12,7 +14,7 @@ function Footer({ logo }) {
         />
       </svg>
       <div className="px-4 pt-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
-        <div className=" lg:col-span-2 flex w-full items-center justify-around">
+        <div className=" lg:col-span-2 flex w-full items-center justify-between">
           <a
             href="/"
             aria-label="Go home"
@@ -21,30 +23,30 @@ function Footer({ logo }) {
           >
             <img className="w-96" src={logo} alt="" />
           </a>
-          <ul className="mt-2 flex gap-4">
+          <ul className="mt-2 flex text-white gap-4">
             <li>
-              <a
-                href="/"
+              <Link
+                to={"/"}
                 className="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400"
               >
                 Accueil
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/"
+              <Link
+                to={"/mon-suivi"}
                 className="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400"
               >
                 Mon suivie
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="/"
+              <Link
+                to={"/recherche"}
                 className="transition-colors duration-300 text-deep-purple-50 hover:text-teal-accent-400"
               >
                 Recherche
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

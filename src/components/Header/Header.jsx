@@ -13,7 +13,7 @@ import notification from "./../../assets/images/icons/notification.png";
 
 export default function Header({ logo }) {
   const navigation = [
-    { name: "Les location", link: "/" },
+    { name: "Les locations", link: "/" },
     { name: "Mon suivi", link: "/mon-suivi" },
     { name: "Recherche", link: "/recherche" },
   ];
@@ -37,7 +37,7 @@ export default function Header({ logo }) {
     <>
       <div className="bg-[#374151] py-5 ">
         <section className="flex justify-around items-center">
-          <nav className="flex items-center gap-2">
+          <nav className="flex items-center w-full justify-between mx-5 gap-2">
             <img className="w-[250px]" src={logo} alt="" />
             <ul className="gap-2 hidden lg:flex">
               {navigation.map((item) => (
@@ -55,25 +55,25 @@ export default function Header({ logo }) {
                 </li>
               ))}
             </ul>
-          </nav>
-          <nav className="flex w-fit gap-4">
-            {!isLogged ? (
-              <button
-                onClick={handleLoginClick}
-                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Se connecter
-              </button>
-            ) : (
-              <button
-                onClick={handleDisconnect}
-                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Se déconnecter
-              </button>
-            )}
-            <img className="w-12" src={logoNoText} alt="" />
-            <img className="w-8 h-8" src={notification} alt="" />
+            <nav className="flex w-[225px] justify-around gap-4">
+              {!isLogged ? (
+                <button
+                  onClick={handleLoginClick}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  Se connecter
+                </button>
+              ) : (
+                <button
+                  onClick={handleDisconnect}
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
+                >
+                  Se déconnecter
+                </button>
+              )}
+              <img className="w-12" src={logoNoText} alt="" />
+              <img className="w-8 h-8" src={notification} alt="" />
+            </nav>
           </nav>
         </section>
         <ul className="gap-2 flex lg:hidden justify-center pt-4">

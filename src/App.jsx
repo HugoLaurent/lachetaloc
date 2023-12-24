@@ -33,7 +33,6 @@ function App() {
       <Layout>
         <Outlet logo={logo} />
       </Layout>
-      ;
     </div>
   );
 }

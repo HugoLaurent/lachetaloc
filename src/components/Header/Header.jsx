@@ -52,10 +52,22 @@ export default function Header({ logo }) {
                   >
                     {item.name}
                   </NavLink>
+                  {isLogged && (
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive
+                          ? "rounded-md  px-3 box-content py-2 text-lg font-medium bg-gray-900 text-white"
+                          : "rounded-md  px-3 box-content py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                      }
+                      to={"/profile"}
+                    >
+                      Mon profil
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </ul>
-            <nav className="flex w-[225px] justify-around gap-4">
+            <nav className="flex w-[150px] justify-around">
               {!isLogged ? (
                 <button
                   onClick={handleLoginClick}
@@ -71,7 +83,7 @@ export default function Header({ logo }) {
                   Se déconnecter
                 </button>
               )}
-              <img className="w-12" src={logoNoText} alt="" />
+
               <img className="w-8 h-8" src={notification} alt="" />
             </nav>
           </nav>

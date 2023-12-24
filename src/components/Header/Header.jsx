@@ -39,7 +39,7 @@ export default function Header({ logo }) {
         <section className="flex justify-around items-center">
           <nav className="flex items-center w-full justify-between mx-5 gap-2">
             <img className="w-[250px]" src={logo} alt="" />
-            <ul className="gap-2 hidden lg:flex">
+            <ul className="gap-2 hidden w-fit lg:flex">
               {navigation.map((item) => (
                 <li key={item.link} className="w-[150px]">
                   <NavLink
@@ -52,20 +52,22 @@ export default function Header({ logo }) {
                   >
                     {item.name}
                   </NavLink>
-                  {isLogged && (
-                    <NavLink
-                      className={({ isActive }) =>
-                        isActive
-                          ? "rounded-md  px-3 box-content py-2 text-lg font-medium bg-gray-900 text-white"
-                          : "rounded-md  px-3 box-content py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                      }
-                      to={"/profile"}
-                    >
-                      Mon profil
-                    </NavLink>
-                  )}
                 </li>
               ))}
+              {isLogged && (
+                <li>
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "rounded-md  px-3 box-content py-2 text-lg font-medium bg-gray-900 text-white"
+                        : "rounded-md  px-3 box-content py-2 text-lg font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                    }
+                    to={"/profile"}
+                  >
+                    Mon profil
+                  </NavLink>
+                </li>
+              )}
             </ul>
             <nav className="flex w-[150px] justify-around">
               {!isLogged ? (

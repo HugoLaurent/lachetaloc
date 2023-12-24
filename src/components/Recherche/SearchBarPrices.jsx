@@ -56,11 +56,10 @@ const prices = {
   "5000€": 5000,
 };
 
-export default function SearchBarLocalisation() {
-  const [selectedPrice, setSelectedPrice] = useState(
-    "Sélectionnez un prix max"
-  );
-
+export default function SearchBarLocalisation({
+  setSelectedPrice,
+  selectedPrice,
+}) {
   const handlePriceSelect = (region) => {
     setSelectedPrice(region);
   };
@@ -86,14 +85,14 @@ export default function SearchBarLocalisation() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1 h-72 overflow-scroll">
             {Object.entries(prices).map(([price]) => (
               <div key={price}>
                 <Menu.Item>
                   <div
                     onClick={() => handlePriceSelect(price)}
-                    className="text-gray-700 font-semibold px-4 py-2 cursor-pointer"
+                    className="text-gray-700 font-semibold px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   >
                     {price}
                   </div>

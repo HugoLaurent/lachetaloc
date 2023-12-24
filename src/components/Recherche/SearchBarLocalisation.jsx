@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
+
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useSelector } from "react-redux";
 
 // Importez vos données de départements
-import departements from "../../assets/data/departement.json";
 
-export default function SearchBarLocalisation() {
-  const [selectedDepartement, setSelectedDepartement] =
-    useState("Localisation");
-
+export default function SearchBarLocalisation({
+  selectedDepartement,
+  setSelectedDepartement,
+}) {
+  const departements = useSelector((state) => state.accomodation.accomodations);
+  console.log(departements);
   const handleDepartementSelect = (region) => {
     setSelectedDepartement(region);
   };
@@ -34,14 +37,14 @@ export default function SearchBarLocalisation() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 z-20 h-96 overflow-scroll mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
             {Object.entries(departements).map(([region]) => (
               <div key={region}>
                 <Menu.Item>
                   <div
                     onClick={() => handleDepartementSelect(region)}
-                    className="text-gray-700 font-semibold px-4 py-2 cursor-pointer"
+                    className="text-gray-700 font-semibold px-4 py-2 cursor-pointer hover:bg-gray-100"
                   >
                     {region}
                   </div>

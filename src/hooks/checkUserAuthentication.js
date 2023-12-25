@@ -18,10 +18,10 @@ async function checkUserAuthentication() {
 
     if (!isTokenValid) {
       console.log("token expired");
+      localStorage.removeItem("token");
       const refreshToken = localStorage.getItem("refreshToken");
       if (!refreshToken) {
         console.log("refresh token not present");
-        localStorage.removeItem("token");
 
         return redirect("/");
       }

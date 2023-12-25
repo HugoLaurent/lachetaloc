@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SearchBarDate from "../components/Recherche/SearchBarDate";
 import SearchBarLocalisation from "../components/Recherche/SearchBarLocalisation";
@@ -8,22 +8,49 @@ import { useSelector } from "react-redux";
 function Recherche() {
   const locations = useSelector((state) => state.accomodation.accomodations);
 
-  console.log(locations);
-
   const [selectedDepartement, setSelectedDepartement] =
     useState("Localisation");
   const [selectedPrice, setSelectedPrice] = useState(
     "Sélectionnez un prix max"
   );
   const [selectedDate, setSelectedDate] = useState(null);
+  const [existingDepartement, setExistingDepartement] = useState([]);
+
+  const [filteredLocations, setFilteredLocations] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const filteredLocations = locations.filter(
-      (location) => location.departement === selectedDepartement
-    );
-    console.log(filteredLocations);
+
+    // Filtrer les locations en fonction des paramètres sélectionnés
+    const filteredLocations = locations.filter((location) => {
+      const departementMatch =
+        selectedDepartement === "Localisation" ||
+        location.location.departement === selectedDepartement;
+
+      const priceMatch =
+        selectedPrice === "Sélectionnez un prix max" ||
+        location.price <= parseInt(selectedPrice);
+
+      const dateMatch =
+        !selectedDate || new Date(location.date) <= selectedDate;
+
+      // Vous pouvez ajuster cette condition en fonction de vos besoins
+
+      return departementMatch && priceMatch && dateMatch;
+    });
+
+    setFilteredLocations(filteredLocations);
   };
+
+  useEffect(() => {
+    for (let index = 0; index < locations.length; index++) {
+      setExistingDepartement((prevState) => [
+        ...prevState,
+        locations[index].location,
+      ]);
+    }
+  }, [locations]);
+
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -32,13 +59,14 @@ function Recherche() {
           className="mx-auto mb-5 max-w-2xl lg:mx-0"
         >
           <h2 className="text-3xl mb-3 font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Mon suivi
+            Rechercher{" "}
           </h2>
           <section className="w-4/5">
             <article className="flex flex-col gap-4">
               <SearchBarLocalisation
                 selectedDepartement={selectedDepartement}
                 setSelectedDepartement={setSelectedDepartement}
+                existingDepartement={existingDepartement}
               />
               <SearchBarPrices
                 selectedPrice={selectedPrice}
@@ -66,14 +94,14 @@ function Recherche() {
           </section>
         </form>
         <section className="flex justify-around gap-5 flex-wrap">
-          {locations.map((location) => (
+          {filteredLocations?.map((location) => (
             <div
               key={location.id}
               className=" max-w-[500px] min-w-[500px] relative"
             >
               <div className="container aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
                 <img
-                  src={location.imageSrc}
+                  src={`https://lachetaloc.onrender.com/public/getImage/${location.id}`}
                   alt={location.imageAlt}
                   className="relative h-full w-full object-cover object-center lg:h-full lg:w-full "
                 />
@@ -91,16 +119,18 @@ function Recherche() {
                   <h3 className="text-sm text-gray-700">
                     <a href={location.href}>
                       <span aria-hidden="true" className="absolute inset-0" />
-                      {location.titre}{" "}
+                      {location.title}{" "}
                     </a>
                   </h3>
-                  <span className="text-sm italic">{location.finBail}</span>
+                  <span className="text-sm italic">
+                    {location.end_of_contract}
+                  </span>
                   <p className="mt-1 text-sm text-gray-500">
                     {location.localisation}
                   </p>
                 </div>
                 <p className="text-sm font-medium text-gray-900">
-                  {location.loyerMensuel}
+                  {location.price} €
                 </p>
               </div>
             </div>

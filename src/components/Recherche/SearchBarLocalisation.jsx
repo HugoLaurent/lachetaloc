@@ -9,9 +9,8 @@ import { useSelector } from "react-redux";
 export default function SearchBarLocalisation({
   selectedDepartement,
   setSelectedDepartement,
+  existingDepartement,
 }) {
-  const departements = useSelector((state) => state.accomodation.accomodations);
-  console.log(departements);
   const handleDepartementSelect = (region) => {
     setSelectedDepartement(region);
   };
@@ -39,14 +38,14 @@ export default function SearchBarLocalisation({
       >
         <Menu.Items className="absolute right-0 z-30 h-96 overflow-scroll mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="py-1">
-            {Object.entries(departements).map(([region]) => (
-              <div key={region}>
+            {existingDepartement.map((objet, index) => (
+              <div key={index}>
                 <Menu.Item>
                   <div
-                    onClick={() => handleDepartementSelect(region)}
+                    onClick={() => handleDepartementSelect(objet.departement)}
                     className="text-gray-700 font-semibold px-4 py-2 cursor-pointer hover:bg-gray-100"
                   >
-                    {region}
+                    {objet.departement}
                   </div>
                 </Menu.Item>
               </div>

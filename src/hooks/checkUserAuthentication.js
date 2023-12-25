@@ -21,6 +21,8 @@ async function checkUserAuthentication() {
       const refreshToken = localStorage.getItem("refreshToken");
       if (!refreshToken) {
         console.log("refresh token not present");
+        localStorage.removeItem("token");
+
         return redirect("/");
       }
       const response = await fetch(

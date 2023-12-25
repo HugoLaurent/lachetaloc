@@ -32,7 +32,7 @@ function Recherche() {
         location.price <= parseInt(selectedPrice);
 
       const dateMatch =
-        !selectedDate || new Date(location.date) <= selectedDate;
+        !selectedDate || new Date(location.date) >= selectedDate;
 
       // Vous pouvez ajuster cette condition en fonction de vos besoins
 

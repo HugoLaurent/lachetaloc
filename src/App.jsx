@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 import logo from "./assets/images/logo/logo.png";
@@ -10,12 +10,14 @@ import Header from "./components/Header/Header.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 
 import { fetchAccomodation } from "../src/app/reducer/accomodationsReducer";
+import { fetchLocations } from "./app/reducer/locationReducer.js";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAccomodation());
+    dispatch(fetchLocations());
   }, [dispatch]);
 
   function Layout({ children }) {

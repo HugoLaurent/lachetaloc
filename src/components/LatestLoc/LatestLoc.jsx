@@ -19,6 +19,10 @@ export default function LatestLoc() {
   const accomodations = useSelector(
     (state) => state.accomodation.accomodations
   );
+
+  const loading = useSelector((state) => state.accomodation.isLoading);
+
+  console.log(loading);
   const latestAccomodation = accomodations.slice(-8);
 
   function handleModal(id, title, description, price, departement, image, end) {
@@ -48,35 +52,104 @@ export default function LatestLoc() {
           Les dernières lachées
         </h2>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {latestAccomodation.length > 0 &&
-            latestAccomodation.map((location) => (
-              <article
-                className="cursor-pointer"
-                onClick={() =>
-                  handleModal(
-                    location.id,
-                    location.title,
-                    location.description,
-                    location.price,
-                    location.location.departement,
-                    location.image,
-                    location.end_of_contract
-                  )
-                }
-                key={location.id}
-              >
-                <AccomodationCard
-                  id={location.id}
-                  title={location.title}
-                  description={location.description}
-                  location_id={location.location_id}
-                  price={location.price}
-                  departement={location.location.departement}
-                />
-              </article>
-            ))}
-        </div>
+        {loading ? (
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            <div className="animate-pulse flex flex-col">
+              <div className="rounded-lg bg-gray-300 h-64 w-full"></div>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 space-y-4 py-1">
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="animate-pulse flex flex-col">
+              <div className="rounded-lg bg-gray-300 h-64 w-full"></div>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 space-y-4 py-1">
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="animate-pulse flex flex-col">
+              <div className="rounded-lg bg-gray-300 h-64 w-full"></div>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 space-y-4 py-1">
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="animate-pulse flex flex-col">
+              <div className="rounded-lg bg-gray-300 h-64 w-full"></div>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 space-y-4 py-1">
+                  <div
+                    className="h-4 bg-gray-300 rounded w-3/4"
+                    style={{ width: "75%" }}
+                  ></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="animate-pulse flex flex-col">
+              <div className="rounded-lg bg-gray-300 h-64 w-full"></div>
+              <div className="flex-1 flex flex-col justify-between">
+                <div className="flex-1 space-y-4 py-1">
+                  <div className="h-4 bg-gray-300 rounded w-3/4"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gray-300 rounded"></div>
+                    <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {latestAccomodation.length > 0 &&
+              latestAccomodation.map((location) => (
+                <article
+                  className="cursor-pointer"
+                  onClick={() =>
+                    handleModal(
+                      location.id,
+                      location.title,
+                      location.description,
+                      location.price,
+                      location.location.departement,
+                      location.image,
+                      location.end_of_contract
+                    )
+                  }
+                  key={location.id}
+                >
+                  <AccomodationCard
+                    id={location.id}
+                    title={location.title}
+                    description={location.description}
+                    location_id={location.location_id}
+                    price={location.price}
+                    departement={location.location.departement}
+                  />
+                </article>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

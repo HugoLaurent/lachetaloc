@@ -1,3 +1,18 @@
+article {
+  animation: slide-in 1s ease;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .overlay {
     position: absolute;
     top: 0;
@@ -10,15 +25,13 @@
     transition: .5s ease;
     background-color:rgb(66, 70, 90, 0.8);
   }
-
   
-  
-  .container:hover .overlay {
+.container:hover .overlay {
     opacity: 1;
   }
   
-  .text {
-    color: white;
+.text {
+  color: white;
     font-size: 16px;
     position: absolute;
     top: 50%;

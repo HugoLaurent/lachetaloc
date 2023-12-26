@@ -22,7 +22,7 @@ function Recherche() {
     e.preventDefault();
 
     // Filtrer les locations en fonction des paramètres sélectionnés
-    const filteredLocations = locations.filter((location) => {
+    const resultFilter = locations.filter((location) => {
       const departementMatch =
         selectedDepartement === "Localisation" ||
         location.location.departement === selectedDepartement;
@@ -32,14 +32,14 @@ function Recherche() {
         location.price <= parseInt(selectedPrice);
 
       const dateMatch =
-        !selectedDate || new Date(location.date) >= selectedDate;
+        !selectedDate || new Date(location.end_of_contract) >= selectedDate;
 
       // Vous pouvez ajuster cette condition en fonction de vos besoins
 
       return departementMatch && priceMatch && dateMatch;
     });
 
-    setFilteredLocations(filteredLocations);
+    setFilteredLocations(resultFilter);
   };
 
   useEffect(() => {
@@ -50,6 +50,15 @@ function Recherche() {
       ]);
     }
   }, [locations]);
+
+  function handleReset() {
+    setSelectedDepartement("Localisation");
+    setSelectedPrice("Sélectionnez un prix max");
+    setSelectedDate(null);
+    setFilteredLocations([1, 2, 3, 4, 5, 6, 7, 8]);
+
+    console.log(filteredLocations, "filteredLocations le reset");
+  }
 
   return (
     <div className="bg-white py-24 sm:py-32">
@@ -86,7 +95,10 @@ function Recherche() {
                 >
                   Rechercher
                 </button>
-                <button className="rounded-md bg-[#0f5cd6] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 transition-all ease-in-out duration-1000">
+                <button
+                  onClick={handleReset}
+                  className="rounded-md bg-[#0f5cd6] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 transition-all ease-in-out duration-1000"
+                >
                   Mettre à zéro
                 </button>
               </div>
@@ -94,47 +106,55 @@ function Recherche() {
           </section>
         </form>
         <section className="flex justify-around gap-5 flex-wrap">
-          {filteredLocations?.map((location) => (
-            <div
-              key={location.id}
-              className=" max-w-[500px] min-w-[500px] relative"
-            >
-              <div className="container aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
-                <img
-                  src={`https://lachetaloc.onrender.com/public/getImage/${location.id}`}
-                  alt={location.imageAlt}
-                  className="relative h-full w-full object-cover object-center lg:h-full lg:w-full "
-                />
-                <div className="overlay z-10 ">
-                  <p className="text">
-                    {location.description}
-                    <button className="rounded-md mt-3 bg-[#374151] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 transition-all ease-in-out duration-1000">
-                      Demander le contact
-                    </button>
-                  </p>
-                </div>
-              </div>
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <a href={location.href}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {location.title}{" "}
-                    </a>
-                  </h3>
-                  <span className="text-sm italic">
-                    {location.end_of_contract}
-                  </span>
-                  <p className="mt-1 text-sm text-gray-500">
-                    {location.localisation}
-                  </p>
-                </div>
-                <p className="text-sm font-medium text-gray-900">
-                  {location.price} €
-                </p>
+          {filteredLocations.length === 0 ? (
+            <div className="mt-4 flex justify-between">
+              <div>
+                <h3 className="text-sm text-gray-700">Aucun résultat</h3>
               </div>
             </div>
-          ))}
+          ) : (
+            filteredLocations?.map((location) => (
+              <div
+                key={location.id}
+                className=" max-w-[500px] min-w-[500px] relative"
+              >
+                <div className="container aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none  lg:h-80">
+                  <img
+                    src={`https://lachetaloc.onrender.com/public/getImage/${location.id}`}
+                    alt={location.imageAlt}
+                    className="relative h-full w-full object-cover object-center lg:h-full lg:w-full "
+                  />
+                  <div className="overlay z-10 ">
+                    <p className="text">
+                      {location.description}
+                      <button className="rounded-md mt-3 bg-[#374151] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 transition-all ease-in-out duration-1000">
+                        Demander le contact
+                      </button>
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-4 flex justify-between">
+                  <div>
+                    <h3 className="text-sm text-gray-700">
+                      <a href={location.href}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {location.title}{" "}
+                      </a>
+                    </h3>
+                    <span className="text-sm italic">
+                      {location.end_of_contract}
+                    </span>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {location.localisation}
+                    </p>
+                  </div>
+                  <p className="text-sm font-medium text-gray-900">
+                    {location.price} €
+                  </p>
+                </div>
+              </div>
+            ))
+          )}
         </section>
       </div>
     </div>

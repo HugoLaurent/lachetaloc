@@ -69,7 +69,7 @@ export default function Header({ logo }) {
                 </li>
               )}
             </ul>
-            <nav className="flex w-[150px] justify-around">
+            <nav className="flex w-[170px] justify-around">
               {!isLogged ? (
                 <button
                   onClick={handleLoginClick}

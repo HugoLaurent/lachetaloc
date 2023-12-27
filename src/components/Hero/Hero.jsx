@@ -8,10 +8,8 @@ export default function Hero({ logo }) {
   let navigate = useNavigate();
 
   const isLogged = useSelector((state) => state.isLogged.isLog);
-  console.log(isLogged);
 
   function handleJeChercheButton() {
-    // dispatch(toggleValue());
     if (isLogged) {
       return navigate("/recherche");
     }

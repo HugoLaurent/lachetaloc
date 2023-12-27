@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import locations from "../assets/data/fakeHouse";
-import { useEffect } from "react";
-import { fetchFollowed } from "../app/reducer/followReducer";
+import { useEffect, useState } from "react";
+import { deleteFollow, fetchFollowed } from "../app/reducer/followReducer";
 import { toggleValue } from "../app/reducer/openLogin";
 
 export default function MyFollow() {
@@ -13,6 +13,11 @@ export default function MyFollow() {
   const followedLocations = useSelector((state) => state.follows.followed);
 
   const isLogged = useSelector((state) => state.isLogged.isLog);
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    dispatch(deleteFollow(e.target.value));
+  };
 
   if (!isLogged) {
     dispatch(toggleValue());
@@ -97,7 +102,11 @@ export default function MyFollow() {
                         <button className="z-10 rounded-md bg-[#374151] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-500 transition-all ease-in-out duration-1000">
                           Demander le contact
                         </button>
-                        <button className="z-10 text-sm rounded-md font-semibold leading-6 px-3.5 py-2.5 text-gray-900 hover:bg-gray-300 transition-all ease-in-out duration-1000">
+                        <button
+                          value={location.id}
+                          onClick={handleDelete}
+                          className="z-10 text-sm rounded-md font-semibold leading-6 px-3.5 py-2.5 text-gray-900 hover:bg-gray-300 transition-all ease-in-out duration-1000"
+                        >
                           Ne plus suivre
                         </button>
                       </div>

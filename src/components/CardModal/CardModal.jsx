@@ -21,18 +21,15 @@ export default function CardModal({
   const [error, setError] = useState("");
 
   const followedByUser = useSelector((state) => state.follows.followed);
-  const test = useSelector((state) => state.follows.followed);
-  console.log(test);
-  console.log(followedByUser);
-
-  console.log(id);
 
   useEffect(() => {
-    findFollowed();
+    if (followedByUser.length > 0) {
+      findFollowed();
+    }
   });
 
   function findFollowed() {
-    const isIdPresent = followedByUser.some((follow) => follow.id === id);
+    const isIdPresent = followedByUser?.some((follow) => follow.id === id);
     if (isIdPresent) {
       return true;
     }
@@ -61,7 +58,6 @@ export default function CardModal({
 
   function onClose() {
     dispatch(toggleValueModal());
-    setError("");
   }
 
   function redirectToLogin() {

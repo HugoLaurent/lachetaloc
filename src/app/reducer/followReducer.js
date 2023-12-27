@@ -20,11 +20,35 @@ export const fetchFollowed = createAsyncThunk(
   }
 );
 
+export const deleteFollow = createAsyncThunk(
+  "followed/deleteFollow",
+
+  async (id) => {
+    await fetch(`https://lachetaloc.onrender.com/follows/delete/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return id;
+  }
+);
+
 const followReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchFollowed.fulfilled, (state, action) => {
     return {
       ...state,
       followed: action.payload,
+    };
+  });
+  builder.addCase(deleteFollow.fulfilled, (state, action) => {
+    const deletedItemId = +action.payload;
+    const updatedFollowed = state.followed.filter(
+      (follow) => follow.id !== deletedItemId
+    );
+    return {
+      ...state,
+      followed: updatedFollowed,
     };
   });
 });

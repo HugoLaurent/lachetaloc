@@ -41,10 +41,7 @@ export default function LatestLoc() {
 
     for (let i = 0; i < 8; i++) {
       loadingElements.push(
-        <div
-          key={i}
-          className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-        >
+        <div key={i}>
           <div className="animate-pulse flex flex-col">
             <div className="rounded-lg bg-gray-300 h-64 w-full"></div>
             <div className="flex-1 flex flex-col justify-between">
@@ -80,7 +77,9 @@ export default function LatestLoc() {
         </h2>
 
         {loading ? (
-          whenLoading()
+          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+            {whenLoading()}
+          </div>
         ) : (
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {latestAccomodation.length > 0 &&

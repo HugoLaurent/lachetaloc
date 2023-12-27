@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleValueModal } from "../../app/reducer/cardModalReducer";
 import { toggleValue } from "../../app/reducer/openLogin";
+import { fetchFollowed } from "../../app/reducer/followReducer";
 
 export default function CardModal({
   id,
@@ -36,6 +37,7 @@ export default function CardModal({
       setError(data.error);
       return;
     }
+    dispatch(fetchFollowed());
   }
 
   function onClose() {

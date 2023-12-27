@@ -15,6 +15,8 @@ import logo from "./assets/images/logo/logo.png";
 
 import canActivate from "./hooks/canActivate.js";
 import checkUserAuthentication from "./hooks/checkUserAuthentication.js";
+import Confidentiality from "./Pages/Confidentiality.jsx";
+import About from "./Pages/About.jsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,8 @@ const router = createBrowserRouter([
       { path: "mon-suivi", element: <MyFollow /> },
       { path: "recherche", element: <Recherche /> },
       { path: "profile", element: <Profile />, loader: canActivate },
+      { path: "confidentialite", element: <Confidentiality /> },
+      { path: "a-propos", element: <About /> },
     ],
   },
 ]);

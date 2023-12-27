@@ -22,9 +22,9 @@ export default function LatestLoc() {
 
   const loading = useSelector((state) => state.accomodation.isLoading);
 
-  console.log(loading);
   const latestAccomodation = accomodations.slice(-8);
 
+  // Function to handle the modal
   function handleModal(id, title, description, price, departement, image, end) {
     dispatch(toggleValueModal());
     setIdCard(id);

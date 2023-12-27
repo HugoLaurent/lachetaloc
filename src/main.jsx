@@ -17,6 +17,7 @@ import canActivate from "./hooks/canActivate.js";
 import checkUserAuthentication from "./hooks/checkUserAuthentication.js";
 import Confidentiality from "./Pages/Confidentiality.jsx";
 import About from "./Pages/About.jsx";
+import Page404 from "./Pages/Page404.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: "profile", element: <Profile />, loader: canActivate },
       { path: "confidentialite", element: <Confidentiality /> },
       { path: "a-propos", element: <About /> },
+      { path: "*", element: <Page404 /> },
     ],
   },
 ]);

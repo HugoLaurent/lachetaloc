@@ -1,15 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleValue } from "../../app/reducer/openLogin";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero({ logo }) {
   const dispatch = useDispatch();
 
+  let navigate = useNavigate();
+
+  const isLogged = useSelector((state) => state.isLogged.isLog);
+  console.log(isLogged);
+
   function handleJeChercheButton() {
-    dispatch(toggleValue());
+    // dispatch(toggleValue());
+    if (isLogged) {
+      return navigate("/recherche");
+    }
+    return dispatch(toggleValue());
   }
 
   function handleJeLacheButton() {
+    if (isLogged) {
+      return navigate("/profile");
+    }
     dispatch(toggleValue());
   }
 

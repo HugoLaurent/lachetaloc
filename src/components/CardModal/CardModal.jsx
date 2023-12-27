@@ -1,4 +1,4 @@
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleValueModal } from "../../app/reducer/cardModalReducer";
@@ -19,6 +19,25 @@ export default function CardModal({
   const cancelButtonRef = useRef(null);
   const token = localStorage.getItem("token");
   const [error, setError] = useState("");
+
+  const followedByUser = useSelector((state) => state.follows.followed);
+  const test = useSelector((state) => state.follows.followed);
+  console.log(test);
+  console.log(followedByUser);
+
+  console.log(id);
+
+  useEffect(() => {
+    findFollowed();
+  });
+
+  function findFollowed() {
+    const isIdPresent = followedByUser.some((follow) => follow.id === id);
+    if (isIdPresent) {
+      return true;
+    }
+    return false;
+  }
 
   async function handleFollow() {
     const response = await fetch(
@@ -123,7 +142,11 @@ export default function CardModal({
                       onClick={handleFollow}
                       ref={cancelButtonRef}
                     >
-                      {!error ? "Je veux le suivre" : error}
+                      {findFollowed() ? (
+                        <span>Vous suivez cette loc ! </span>
+                      ) : (
+                        <span>Suivre cette loc !</span>
+                      )}
                     </button>
                   )}
                   <button

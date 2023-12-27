@@ -14,8 +14,6 @@ export default function SearchBarLocalisation({
     setSelectedDepartement(region);
   };
 
-  console.log(locations);
-
   return (
     <Menu as="div" className="relative inline-block z-30 text-left">
       <div>

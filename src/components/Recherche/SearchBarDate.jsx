@@ -7,7 +7,7 @@ export default function SearchBarDate({ selectedDate, setSelectedDate }) {
   };
 
   return (
-    <div className="">
+    <div className="relative z-30">
       <DatePicker
         selected={selectedDate}
         onChange={handleDateChange}

@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Outlet } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import logo from "./assets/images/logo/logo.png";

@@ -33,6 +33,8 @@ function Recherche() {
   const [imageCard, setImageCard] = useState("");
   const [endCard, setEndCard] = useState("");
 
+  const [message, setMessage] = useState("Attrapez une loc lachée !");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -55,6 +57,9 @@ function Recherche() {
     });
 
     setFilteredLocations(resultFilter);
+    if (resultFilter.length === 0) {
+      setMessage("Aucune location ne correspond à votre recherche");
+    }
   };
 
   function handleReset() {
@@ -62,6 +67,7 @@ function Recherche() {
     setSelectedPrice("Sélectionnez un prix max");
     setSelectedDate(null);
     setFilteredLocations([]);
+    setMessage("Attrapez une loc lachée !");
   }
 
   function handleModal(id, title, description, price, departement, image, end) {
@@ -100,13 +106,13 @@ function Recherche() {
                 <SearchBarLocalisation
                   selectedDepartement={selectedDepartement}
                   setSelectedDepartement={setSelectedDepartement}
-                  existingDepartement={locations}
+                  locations={locations}
                 />
                 <SearchBarPrices
                   selectedPrice={selectedPrice}
                   setSelectedPrice={setSelectedPrice}
                 />
-                <div className="flex z-30 justify-between">
+                <div className="flex z-10 justify-between">
                   <SearchBarDate
                     setSelectedDate={setSelectedDate}
                     selectedDate={selectedDate}
@@ -131,11 +137,14 @@ function Recherche() {
               </article>
             </section>
           </form>
-          <section className="flex justify-around gap-5 flex-wrap">
+          <section
+            className="flex justify-around gap-5 flex-wrap"
+            style={{ zIndex: 1 }}
+          >
             {filteredLocations?.length === 0 ? (
               <div className="mt-4 flex justify-between">
                 <div>
-                  <h3 className="text-sm text-gray-700">Aucun résultat</h3>
+                  <h3 className="text-sm text-gray-700">{message}</h3>
                 </div>
               </div>
             ) : (

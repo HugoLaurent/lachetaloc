@@ -9,7 +9,7 @@ function AccomodationCard(props) {
           alt={title}
           className="relative h-full w-full object-cover object-center lg:h-full lg:w-full "
         />
-        <div className="overlay z-10">
+        <div className="overlay" style={{ zIndex: 5 }}>
           <p className="text">{description}</p>
         </div>
       </div>

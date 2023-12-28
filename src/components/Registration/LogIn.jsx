@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { changeStatus } from "../../app/reducer/loginStatusReducer";
 import { toggleValue } from "../../app/reducer/openLogin";
+import Alert from "../Alert/Alert";
 
 export default function LogIn({ switchRegistration, setSwitchRegistration }) {
   const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
+
+  const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
@@ -23,7 +26,11 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
       );
       dispatch(changeStatus());
       dispatch(toggleValue());
-
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        setErrorMessage(errorResponse.message);
+        throw new Error(errorResponse.message || "Failed to log an user");
+      }
       const token = await response.json();
       localStorage.setItem("token", token.token);
       localStorage.setItem("refreshToken", token.refreshToken);
@@ -31,6 +38,16 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
       return error;
     }
   };
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setErrorMessage("");
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeoutId); // Nettoyage du timeout si le composant est démonté ou si la dépendance change
+    };
+  }, [errorMessage]);
 
   return (
     <>
@@ -40,6 +57,11 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
         }`}
       >
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+          {errorMessage && (
+            <div className="absolute -top-4 w-full">
+              <Alert message={errorMessage} />
+            </div>
+          )}
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Connecter vous à votre compte.
           </h2>

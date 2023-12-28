@@ -6,7 +6,6 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [errorCode, setErrorCode] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +24,6 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
 
       if (!response.ok) {
         const errorResponse = await response.json();
-        setErrorCode(errorResponse.code);
         setErrorMessage(errorResponse.message);
         throw new Error(errorResponse.message || "Failed to create user");
       }

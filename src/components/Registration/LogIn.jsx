@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { changeStatus } from "../../app/reducer/loginStatusReducer";
 import { toggleValue } from "../../app/reducer/openLogin";
 import Alert from "../Alert/Alert";
+import { toggleAlertModal } from "../../app/reducer/loginAlertReducer";
 
 export default function LogIn({ switchRegistration, setSwitchRegistration }) {
   const [pseudo, setPseudo] = useState("");
@@ -24,16 +25,20 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
           body: JSON.stringify({ pseudo, password }),
         }
       );
-      dispatch(changeStatus());
-      dispatch(toggleValue());
-      if (!response.ok) {
-        const errorResponse = await response.json();
-        setErrorMessage(errorResponse.message);
-        throw new Error(errorResponse.message || "Failed to log an user");
+
+      if (response.ok) {
+        const token = await response.json();
+        localStorage.setItem("token", token.token);
+        localStorage.setItem("refreshToken", token.refreshToken);
+        dispatch(changeStatus());
+        dispatch(toggleValue());
+        dispatch(toggleAlertModal());
+        return;
       }
-      const token = await response.json();
-      localStorage.setItem("token", token.token);
-      localStorage.setItem("refreshToken", token.refreshToken);
+      const errorResponse = await response.json();
+      console.log(errorResponse);
+      setErrorMessage(errorResponse.error);
+      throw new Error(errorResponse.error || "Failed to log an user");
     } catch (error) {
       return error;
     }
@@ -52,16 +57,16 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
   return (
     <>
       <div
-        className={`flex min-h-full transition-all ease-in min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8 ${
+        className={`flex min-h-full transition-all ease-in min-w-fit flex-1 relative flex-col justify-center px-6 py-12 lg:px-8 relative ${
           switchRegistration ? "opacity-0" : ""
         }`}
       >
+        {errorMessage && (
+          <div className="absolute top-0 w-full">
+            <Alert message={errorMessage} />
+          </div>
+        )}
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          {errorMessage && (
-            <div className="absolute -top-4 w-full">
-              <Alert message={errorMessage} />
-            </div>
-          )}
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Connecter vous à votre compte.
           </h2>

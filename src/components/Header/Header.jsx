@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
 import { toggleValue } from "../../app/reducer/openLogin";
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Transition, Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { changeStatus } from "../../app/reducer/loginStatusReducer";
+import { toggleAlertModal } from "../../app/reducer/loginAlertReducer";
 import LogIn from "../Registration/LogIn";
 import SignIn from "../Registration/SignIn";
 
-import logoNoText from "./../../assets/images/logo/logo-sans-texte.png";
 import notification from "./../../assets/images/icons/notification.png";
 
 export default function Header({ logo }) {
@@ -22,6 +22,8 @@ export default function Header({ logo }) {
   const dispatch = useDispatch();
   const openLogin = useSelector((state) => state.openLogin.value);
   const isLogged = useSelector((state) => state.isLogged.isLog);
+  const displayAlert = useSelector((state) => state.loginAlert.value);
+  console.log(displayAlert);
 
   const handleLoginClick = () => {
     dispatch(toggleValue());
@@ -32,6 +34,29 @@ export default function Header({ logo }) {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
   }
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  useEffect(() => {
+    if (displayAlert) {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+        dispatch(toggleAlertModal(false));
+      }, 5000);
+    }
+  }, [dispatch, displayAlert]);
+
+  const [showDisconnect, setShowDisconnect] = useState(false);
+
+  useEffect(() => {
+    if (!isLogged) {
+      setShowDisconnect(true);
+      setTimeout(() => {
+        setShowDisconnect(false);
+      }, 5000);
+    }
+  }, [isLogged]);
 
   return (
     <>
@@ -193,6 +218,21 @@ export default function Header({ logo }) {
           </div>
         </Dialog>
       </Transition.Root>
+
+      <div
+        className={`transition-all flex justify-center duration-1000 ease-in-out text-white bg-green-600  ${
+          showAlert ? "h-12" : "h-0"
+        }`}
+      >
+        <p>Vous êtes connecté</p>
+      </div>
+      <div
+        className={`transition-all flex justify-center duration-1000 ease-in-out text-white bg-red-600  ${
+          showDisconnect ? "h-12" : "h-0"
+        }`}
+      >
+        <p>Vous êtes déconnecté</p>
+      </div>
     </>
   );
 }

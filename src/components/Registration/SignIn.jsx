@@ -48,13 +48,13 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
 
   return (
     <>
-      <div className="flex min-h-full min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
+      <div className="flex min-h-full min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8 relative">
+        {errorMessage && (
+          <div className="absolute top-0 w-full">
+            <Alert message={errorMessage} />
+          </div>
+        )}
         <div className="sm:mx-auto sm:w-full sm:max-w-sm relative">
-          {errorMessage && (
-            <div className="absolute -top-4 w-full">
-              <Alert message={errorMessage} />
-            </div>
-          )}
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Inscrivez vous à lache ta loc !
           </h2>

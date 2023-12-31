@@ -10,7 +10,7 @@ import LogIn from "../Registration/LogIn";
 import SignIn from "../Registration/SignIn";
 
 import notification from "./../../assets/images/icons/notification.png";
-import { logout } from "../../app/reducer/userReducer";
+import { userLogout } from "../../app/reducer/userReducer";
 
 export default function Header({ logo }) {
   const navigation = [
@@ -31,7 +31,8 @@ export default function Header({ logo }) {
 
   function handleDisconnect() {
     dispatch(changeStatus());
-    dispatch(logout());
+    dispatch(userLogout());
+    dispatch(userLogout());
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
   }

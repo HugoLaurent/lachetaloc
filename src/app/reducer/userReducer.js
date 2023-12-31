@@ -14,7 +14,6 @@ const initialState = {
 export const fetchUserInfo = createAsyncThunk(
   "user/fetchUserInfo",
   async (token) => {
-    console.log("passage dans le thunk");
     const decryptedToken = jwtDecode(token);
 
     const response = await fetch(
@@ -26,23 +25,20 @@ export const fetchUserInfo = createAsyncThunk(
       }
     );
     const data = await response.json();
-    console.log(data);
     return data;
   }
 );
 
-export const logout = createAction("user/logout");
+export const userLogout = createAction("user/userLogout");
 
 const userReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchUserInfo.fulfilled, (state, action) => {
-    console.log("passage dans le reducer");
     return {
       ...state,
       user: action.payload,
     };
   });
-  builder.addCase(logout, (state) => {
-    console.log("logout");
+  builder.addCase(userLogout, (state) => {
     return {
       ...state,
       user: [],

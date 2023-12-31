@@ -44,7 +44,6 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
         return;
       }
       const errorResponse = await response.json();
-      console.log(errorResponse);
       setErrorMessage(errorResponse.error);
       throw new Error(errorResponse.error || "Failed to log an user");
     } catch (error) {

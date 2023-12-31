@@ -38,7 +38,7 @@ export const deleteFollow = createAsyncThunk(
   }
 );
 
-export const logout = createAction("followed/logout");
+export const followLogout = createAction("followed/followLogout");
 
 const followReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchFollowed.fulfilled, (state, action) => {
@@ -57,7 +57,7 @@ const followReducer = createReducer(initialState, (builder) => {
       followed: updatedFollowed,
     };
   });
-  builder.addCase(logout, (state) => {
+  builder.addCase(followLogout, (state) => {
     return {
       ...state,
       followed: [],

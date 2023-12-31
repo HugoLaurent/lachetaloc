@@ -10,6 +10,7 @@ import LogIn from "../Registration/LogIn";
 import SignIn from "../Registration/SignIn";
 
 import notification from "./../../assets/images/icons/notification.png";
+import { logout } from "../../app/reducer/userReducer";
 
 export default function Header({ logo }) {
   const navigation = [
@@ -23,7 +24,6 @@ export default function Header({ logo }) {
   const openLogin = useSelector((state) => state.openLogin.value);
   const isLogged = useSelector((state) => state.isLogged.isLog);
   const displayAlert = useSelector((state) => state.loginAlert.value);
-  console.log(displayAlert);
 
   const handleLoginClick = () => {
     dispatch(toggleValue());
@@ -31,6 +31,7 @@ export default function Header({ logo }) {
 
   function handleDisconnect() {
     dispatch(changeStatus());
+    dispatch(logout());
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
   }

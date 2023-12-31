@@ -1,9 +1,14 @@
 import { useState } from "react";
 import check from "../assets/images/icons/check.png";
 import locations from "../assets/data/fakeHouse";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
   const [toModify, setToModify] = useState(false);
+
+  const user = useSelector((state) => state.userInfo.user);
+  console.log(user);
+
   return (
     <div className="mt-8 mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -17,50 +22,12 @@ export default function Profile() {
               <input
                 className="border-1 shadow-md  border-black"
                 type="text"
-                name=""
-                id=""
-                placeholder="Flicktupue"
+                placeholder="Changer votre pseudo"
               />
               <img className="w-5" src={check} />
             </>
           ) : (
-            <span className="text-black">Flicktupue</span>
-          )}{" "}
-        </p>
-
-        <p className="text-sm flex gap-2 text-gray-500">
-          Nom :
-          {toModify === true ? (
-            <>
-              <input
-                className="rounded shadow-md  border-black"
-                type="text"
-                name=""
-                id=""
-                placeholder="John"
-              />
-              <img className="w-5" src={check} />
-            </>
-          ) : (
-            <span className="text-black">John</span>
-          )}{" "}
-        </p>
-
-        <p className="text-sm flex gap-2 text-gray-500">
-          Prénom :
-          {toModify === true ? (
-            <>
-              <input
-                className="border-1 shadow-md  border-black"
-                type="text"
-                name=""
-                id=""
-                placeholder="Doe"
-              />
-              <img className="w-5" src={check} />
-            </>
-          ) : (
-            <span className="text-black">Doe</span>
+            <span className="text-black">{user.pseudo}</span>
           )}{" "}
         </p>
 
@@ -70,15 +37,29 @@ export default function Profile() {
             <>
               <input
                 className="border-1 shadow-md  border-black"
-                type="text"
-                name=""
-                id=""
-                placeholder="emailmoithis@gmail.com"
+                type="email"
+                placeholder="Changez votre email"
               />
               <img className="w-5" src={check} />
             </>
           ) : (
-            <span className="text-black">emailmoithis@gmail.com</span>
+            <span className="text-black">{user.email}</span>
+          )}
+        </p>
+
+        <p className="text-sm flex gap-2 text-gray-500">
+          Mot de passe :
+          {toModify === true ? (
+            <>
+              <input
+                className="border-1 shadow-md  border-black"
+                type="password"
+                placeholder="Changez votre mot de passe"
+              />
+              <img className="w-5" src={check} />
+            </>
+          ) : (
+            <span className="text-black">**********</span>
           )}
         </p>
       </div>

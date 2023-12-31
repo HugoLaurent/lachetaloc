@@ -5,6 +5,7 @@ import openLogin from "./openLogin";
 import cardModalReducer from "./cardModalReducer";
 import locationsReducer from "./locationReducer";
 import loginAlertReducer from "./loginAlertReducer";
+import userReducer from "./userReducer";
 
 const reducer = {
   openLogin: openLogin.reducer,
@@ -14,6 +15,7 @@ const reducer = {
   modal: cardModalReducer.reducer,
   location: locationsReducer,
   loginAlert: loginAlertReducer.reducer,
+  userInfo: userReducer,
 };
 
 export default reducer;

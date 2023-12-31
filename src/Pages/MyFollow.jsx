@@ -1,21 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { deleteFollow, fetchFollowed } from "../app/reducer/followReducer";
+import { deleteFollow } from "../app/reducer/followReducer";
 import { toggleValue } from "../app/reducer/openLogin";
 
 export default function MyFollow() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(fetchFollowed());
-  }, [dispatch]);
 
   const followedLocations = useSelector((state) => state.follows.followed);
 
   const isLogged = useSelector((state) => state.isLogged.isLog);
 
+  const token = localStorage.getItem("token");
   const handleDelete = (e) => {
     e.preventDefault();
-    dispatch(deleteFollow(e.target.value));
+    dispatch(deleteFollow(e.target.value, token));
   };
 
   if (!isLogged) {

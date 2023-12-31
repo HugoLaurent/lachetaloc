@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { changeStatus } from "../../app/reducer/loginStatusReducer";
 import { toggleValue } from "../../app/reducer/openLogin";
 import Alert from "../Alert/Alert";
 import { toggleAlertModal } from "../../app/reducer/loginAlertReducer";
+import { fetchUserInfo } from "../../app/reducer/userReducer";
+import { fetchFollowed } from "../../app/reducer/followReducer";
 
 export default function LogIn({ switchRegistration, setSwitchRegistration }) {
   const [pseudo, setPseudo] = useState("");
@@ -11,6 +14,7 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
 
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,6 +37,10 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
         dispatch(changeStatus());
         dispatch(toggleValue());
         dispatch(toggleAlertModal());
+        dispatch(fetchUserInfo(token.token));
+        dispatch(fetchFollowed(token.token));
+        navigate("/");
+
         return;
       }
       const errorResponse = await response.json();
@@ -57,7 +65,7 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
   return (
     <>
       <div
-        className={`flex min-h-full transition-all ease-in min-w-fit flex-1 relative flex-col justify-center px-6 py-12 lg:px-8 relative ${
+        className={`flex min-h-full transition-all ease-in min-w-fit flex-1 flex-col justify-center px-6 py-12 lg:px-8 relative ${
           switchRegistration ? "opacity-0" : ""
         }`}
       >

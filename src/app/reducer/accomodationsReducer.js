@@ -1,4 +1,8 @@
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from "@reduxjs/toolkit";
 
 const initialState = {
   accomodations: [],
@@ -17,6 +21,8 @@ export const fetchAccomodation = createAsyncThunk(
   }
 );
 
+export const logout = createAction("accomodations/logout");
+
 const accomodationsReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchAccomodation.pending, (state) => {
@@ -30,6 +36,12 @@ const accomodationsReducer = createReducer(initialState, (builder) => {
         ...state,
         accomodations: action.payload,
         isLoading: false,
+      };
+    })
+    .addCase(logout, (state) => {
+      return {
+        ...state,
+        accomodations: [],
       };
     });
 });

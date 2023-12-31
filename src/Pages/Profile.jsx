@@ -7,7 +7,15 @@ export default function Profile() {
   const [toModify, setToModify] = useState(false);
 
   const user = useSelector((state) => state.userInfo.user);
-  console.log(user);
+
+  const accomodations = useSelector(
+    (state) => state.accomodation.accomodations
+  );
+  console.log(accomodations);
+  const filteredAccomodations = accomodations.filter(
+    (accomodation) => accomodation.user_id === user.id
+  );
+  console.log(filteredAccomodations);
 
   return (
     <div className="mt-8 mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
@@ -79,7 +87,9 @@ export default function Profile() {
         </div>
         <div className="mt-4 flex flex-col justify-around">
           <div>
-            <h3 className="text-sm text-gray-700">{locations[0].titre}</h3>
+            <h3 className="text-sm text-gray-700">
+              {filteredAccomodations.title}
+            </h3>
             <p className="mt-1 text-sm text-gray-500">
               {locations[0].localisation}
             </p>

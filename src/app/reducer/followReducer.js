@@ -1,4 +1,8 @@
-import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from "@reduxjs/toolkit";
 
 const token = localStorage.getItem("token");
 
@@ -34,6 +38,8 @@ export const deleteFollow = createAsyncThunk(
   }
 );
 
+export const logout = createAction("followed/logout");
+
 const followReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchFollowed.fulfilled, (state, action) => {
     return {
@@ -49,6 +55,12 @@ const followReducer = createReducer(initialState, (builder) => {
     return {
       ...state,
       followed: updatedFollowed,
+    };
+  });
+  builder.addCase(logout, (state) => {
+    return {
+      ...state,
+      followed: [],
     };
   });
 });

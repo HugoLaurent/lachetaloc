@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toggleValue } from "../../app/reducer/openLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import SignIn from "../Registration/SignIn";
 
 import notification from "./../../assets/images/icons/notification.png";
 import { userLogout } from "../../app/reducer/userReducer";
+import { followLogout, resetState } from "../../app/reducer/followReducer";
 
 export default function Header({ logo }) {
   const navigation = [
@@ -18,6 +19,8 @@ export default function Header({ logo }) {
     { name: "Mon suivi", link: "/mon-suivi" },
     { name: "Recherche", link: "/recherche" },
   ];
+
+  const navigate = useNavigate();
 
   const [switchRegistration, setSwitchRegistration] = useState(false);
   const dispatch = useDispatch();
@@ -32,9 +35,11 @@ export default function Header({ logo }) {
   function handleDisconnect() {
     dispatch(changeStatus());
     dispatch(userLogout());
-    dispatch(userLogout());
+    dispatch(followLogout());
+
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
+    navigate("/");
   }
 
   const [showAlert, setShowAlert] = useState(false);

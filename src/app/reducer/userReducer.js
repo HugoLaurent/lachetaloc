@@ -38,11 +38,8 @@ const userReducer = createReducer(initialState, (builder) => {
       user: action.payload,
     };
   });
-  builder.addCase(userLogout, (state) => {
-    return {
-      ...state,
-      user: [],
-    };
+  builder.addCase(userLogout, () => {
+    return initialState;
   });
 });
 

@@ -1,10 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import check from "../assets/images/icons/check.png";
 import locations from "../assets/data/fakeHouse";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserInfo } from "../app/reducer/userReducer";
 
 export default function Profile() {
+  const dispatch = useDispatch();
   const [toModify, setToModify] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchUserInfo(localStorage.getItem("token")));
+  }, [dispatch]);
 
   const user = useSelector((state) => state.userInfo.user);
 

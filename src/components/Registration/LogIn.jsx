@@ -38,7 +38,9 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
         dispatch(toggleValue());
         dispatch(toggleAlertModal());
         dispatch(fetchUserInfo(token.token));
-        dispatch(fetchFollowed(token.token));
+        if (window.location.pathname === "/") {
+          return null;
+        }
         navigate("/");
 
         return;

@@ -1,8 +1,4 @@
-import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   accomodations: [],

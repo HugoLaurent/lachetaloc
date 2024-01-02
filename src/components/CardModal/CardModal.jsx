@@ -40,7 +40,7 @@ export default function CardModal({
 
   async function handleFollow() {
     const response = await fetch(
-      `https://lachetaloc.onrender.com/follows/${id}`,
+      `https://lachetaloc.onrender.com/api/follows/${id}`,
       {
         method: "POST",
         headers: {
@@ -110,7 +110,7 @@ export default function CardModal({
                       </Dialog.Title>
                       <div className="mt-2">
                         <img
-                          src={`https://lachetaloc.onrender.com/public/getImage/${id}`}
+                          src={`https://lachetaloc.onrender.com/api/public/getImage/${id}`}
                           alt=""
                         />
                         <p className="text-sm text-gray-500 pt-5">

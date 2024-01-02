@@ -12,7 +12,7 @@ export default function SignIn({ switchRegistration, setSwitchRegistration }) {
 
     try {
       const response = await fetch(
-        "https://lachetaloc.onrender.com/users/create",
+        "https://lachetaloc.onrender.com/api/users/create",
         {
           method: "POST",
           headers: {

@@ -26,7 +26,7 @@ async function checkUserAuthentication() {
         return redirect("/");
       }
       const response = await fetch(
-        "https://lachetaloc.onrender.com/auth/refresh",
+        "https://lachetaloc.onrender.com/api/auth/refresh",
         {
           method: "POST",
           headers: {

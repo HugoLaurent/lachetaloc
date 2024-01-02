@@ -14,7 +14,7 @@ export const fetchAccomodation = createAsyncThunk(
 
   async () => {
     const response = await fetch(
-      "https://lachetaloc.onrender.com/public/allAccomodation"
+      "https://lachetaloc.onrender.com/api/public/accomodations"
     );
     const data = await response.json();
     return data;

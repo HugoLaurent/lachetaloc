@@ -17,7 +17,7 @@ export const fetchUserInfo = createAsyncThunk(
     const decryptedToken = jwtDecode(token);
 
     const response = await fetch(
-      `https://lachetaloc.onrender.com/users/${decryptedToken.id}`,
+      `https://lachetaloc.onrender.com/api/users/${decryptedToken.id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

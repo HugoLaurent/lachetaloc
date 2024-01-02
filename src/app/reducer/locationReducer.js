@@ -9,7 +9,7 @@ export const fetchLocations = createAsyncThunk(
 
   async () => {
     const response = await fetch(
-      "https://lachetaloc.onrender.com/public/getAllLocation"
+      "https://lachetaloc.onrender.com/api/public/getAllLocation"
     );
     const data = await response.json();
     return data;

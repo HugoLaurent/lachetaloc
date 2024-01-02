@@ -20,7 +20,7 @@ export default function LogIn({ switchRegistration, setSwitchRegistration }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        "https://lachetaloc.onrender.com/auth/login",
+        "https://lachetaloc.onrender.com/api/auth/login",
         {
           method: "POST",
           headers: {

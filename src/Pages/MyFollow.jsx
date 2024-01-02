@@ -57,7 +57,7 @@ export default function MyFollow() {
                 key={location.id}
                 className={`flex max-w-xl flex-col items-start justify-between`}
                 style={{
-                  backgroundImage: `url(https://lachetaloc.onrender.com/public/getImage/${location.id})`,
+                  backgroundImage: `url(https://lachetaloc.onrender.com/api/public/getImage/${location.id})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                 }}
@@ -84,7 +84,7 @@ export default function MyFollow() {
                   </div>
                   <div className="relative mt-8 flex items-center gap-x-4">
                     <img
-                      src={`https://lachetaloc.onrender.com/public/getImage/${location.id}`}
+                      src={`https://lachetaloc.onrender.com/api/public/getImage/${location.id}`}
                       alt=""
                       className="h-10 w-10 rounded-full bg-gray-50"
                     />

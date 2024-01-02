@@ -14,11 +14,14 @@ export const fetchFollowed = createAsyncThunk(
   "followed/fetchFollowed",
 
   async () => {
-    const response = await fetch("https://lachetaloc.onrender.com/follows", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response = await fetch(
+      "https://lachetaloc.onrender.com/api/follows",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     const data = await response.json();
     return data;
   }
@@ -30,7 +33,7 @@ export const deleteFollow = createAsyncThunk(
   "followed/deleteFollow",
 
   async (id) => {
-    await fetch(`https://lachetaloc.onrender.com/follows/delete/${id}`, {
+    await fetch(`https://lachetaloc.onrender.com/api/follows/delete/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,

@@ -20,28 +20,27 @@ async function checkUserAuthentication() {
       console.log("token expired");
       localStorage.removeItem("token");
       const refreshToken = localStorage.getItem("refreshToken");
-      if (!refreshToken) {
-        console.log("refresh token not present");
-
-        return redirect("/");
-      }
-      const response = await fetch(
-        "https://lachetaloc.onrender.com/api/auth/refresh",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ refreshToken }),
+      if (refreshToken) {
+        const response = await fetch(
+          "https://lachetaloc.onrender.com/api/auth/refresh",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ refreshToken }),
+          }
+        );
+        const data = await response.json();
+        if (data.token) {
+          store.dispatch(changeStatus(true));
+          localStorage.setItem("token", data.token);
+          console.log("token refresh");
+          return true;
         }
-      );
-      const data = await response.json();
-      if (data.token) {
-        store.dispatch(changeStatus(true));
-        localStorage.setItem("token", data.token);
-        console.log("token refresh");
-        return true;
       }
+      console.log("refresh token not present");
+
       return redirect("/");
     }
     console.log("token valid");
